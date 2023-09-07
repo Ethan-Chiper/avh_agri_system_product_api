@@ -6,7 +6,7 @@ const logger = winston.createLogger({
 
 function MultiDBConnection() {
     this.createConnection = () => {
-        mongoose.connect('mongodb://localhost:27017/agri_world', {
+        mongoose.connect('mongodb://192.168.0.108:27017/agri_world', {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             serverSelectionTimeoutMS: 10000
