@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 
 // app.use('/api/farmer', require('./Controllers/Farmer/FarmerRouter'));
 
-let server = app.listen(5006, () => {
+let server = app.listen(5076, () => {
     logger.info('Server is running port on: ' + server.address().port);
 });
 
