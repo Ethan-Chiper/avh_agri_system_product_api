@@ -3,6 +3,7 @@ const app = Express();
 let helmet = require('helmet');
 app.use(helmet.hidePoweredBy());
 const bodyParser = require('body-parser');
+const ExpressIgniter = require('./App/Connection').expressIgniter;
 
 const winston = require('winston');
 const logger = winston.createLogger({
@@ -12,11 +13,8 @@ const logger = winston.createLogger({
 require('./Database/MultiConnection').createConnection();
 app.use(bodyParser.json());
 
-// app.use('/api/farmer', require('./Controllers/Farmer/FarmerRouter'));
+app.use('/api/product', require('./Routes/ProductRouter'));
 
-let server = app.listen(5072, () => {
-    logger.info('Server is running port on: ' + server.address().port);
-});
 
-module.exports = app;
+ExpressIgniter(app);
 
