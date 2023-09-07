@@ -1,99 +1,93 @@
-const Connection = require('./MultiConnection');
-const ProductConnection = Connection.getProductDBConnection();
+const DBConnection = require('./MultiConnection');
+const ProductConnection = DBConnection.getProductDBConnection();
 const timestamps = require('mongoose-timestamp');
 const mongoose = require('mongoose');
 
 function Schema() {
 
     let ProductSchema = new ProductConnection.Schema({
-        product: {
-            id: "product_id",
-            name: "Product Name",
-            description: "Product Description",
-            category: "Product Category",
-            variety: "Product Variety",
-            origin: "Product Origin",
-            harvest: {
-                season: "Harvest Season",
-                date: "Harvest Date"
+        id: {type: String},
+        name: {type: String},
+        description: {type: String},
+        category: {type: String},
+        variety: {type: String},
+        origin: {type: String},
+        harvest: {
+            season: {type: String},
+            date: {type: String}
+        },
+        certifications: [
+            {
+                type: {type: String},
+                authority: {type: String},
+                date: {type: String}
             },
-            certifications: [
+            {
+                type: {type: String},
+                authority: {type: String},
+                date: {type: String}
+            }
+        ],
+        price: {
+            currency: {type: String},
+            amount: {type: String}
+        },
+        availability: {
+            quantity: {type: String},
+            unit: {type: String}
+        },
+        seller: {
+            name: {type: String},
+            contact: {
+                email: {type: String},
+                phone: {type: String},
+                address: {type: String}
+            }
+        },
+        images: [
+            {
+                url: {type: String},
+                caption: {type: String}
+            },
+            {
+                url: {type: String},
+                caption: {type: String}
+            }
+        ],
+        nutritional_info: {
+            calories_per_unit: {type: String},
+            nutrients_per_unit: [
                 {
-                    type: "Certification Type 1",
-                    authority: "Certification Authority 1",
-                    date: "Certification Date 1"
+                    name: {type: String},
+                    value: {type: Number},
+                    unit: {type: String}
                 },
                 {
-                    type: "Certification Type 2",
-                    authority: "Certification Authority 2",
-                    date: "Certification Date 2"
-                }
-            ],
-            price: {
-                currency: "USD",
-                amount: 10.99
-            },
-            availability: {
-                quantity: 1000,
-                unit: "kg"
-            },
-            seller: {
-                name: "Seller Name",
-                contact: {
-                    email: "seller@email.com",
-                    phone: "+1234567890",
-                    address: "Seller Address"
-                }
-            },
-            images: [
-                {
-                    url: "image_url_1.jpg",
-                    caption: "Image 1 Caption"
+                    name: {type: String},
+                    value: {type: Number},
+                    unit: {type: String}
                 },
                 {
-                    url: "image_url_2.jpg",
-                    caption: "Image 2 Caption"
+                    name: {type: String},
+                    value: {type: Number},
+                    unit: {type: String}
                 }
-            ],
-            nutritional_info: {
-                calories_per_unit: 50,
-                nutrients_per_unit: [
-                    {
-                        name: "Protein",
-                        value: 2.5,
-                        unit: "g"
-                    },
-                    {
-                        name: "Carbohydrates",
-                        value: 12.5,
-                        unit: "g"
-                    },
-                    {
-                        name: "Fat",
-                        value: 0.5,
-                        unit: "g"
-                    }
-                ]
-            },
-            storage_info: {
-                temperature: "Store at 2-4°C",
-                humidity: "Relative humidity below 60%"
-            },
-            packaging_info: {
-                type: "Packaging Type",
-                weight: 1.5,
-                dimensions: {
-                    length: 10,
-                    width: 5,
-                    height: 3
-                }
-            },
-            shipping_info: {
-                shipping_from: "Shipping Location",
-                shipping_cost: {
-                    currency: "USD",
-                    amount: 5.99
-                }
+            ]
+        },
+        packaging_info: {
+            type: {type: String},
+            weight: {type: Number},
+            dimensions: {
+                length: {type: Number},
+                width: {type: Number},
+                height: {type: Number}
+            }
+        },
+        shipping_info: {
+            shipping_from: {type: String},
+            shipping_cost: {
+                currency: {type: String},
+                amount: {type: Number}
             }
         }
     });
