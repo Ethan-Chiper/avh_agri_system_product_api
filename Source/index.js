@@ -1,8 +1,10 @@
 const Express = require('express');
-const app = Express();
+const App = Express();
 let helmet = require('helmet');
-app.use(helmet.hidePoweredBy());
+App.use(helmet.hidePoweredBy());
 const bodyParser = require('body-parser');
+
+
 const ExpressIgniter = require('./App/Connection').expressIgniter;
 
 const winston = require('winston');
@@ -11,10 +13,13 @@ const logger = winston.createLogger({
 });
 
 require('./Database/MultiConnection').createConnection();
-app.use(bodyParser.json());
+App.use(bodyParser.json());
 
-app.use('/api/product', require('./Routes/ProductRouter'));
+App.use('/api/product', require('./Routes/ProductRouter'));
+App.use('/api/former', require('./Routes/FarmerRouter'));
 
+// require('./DataBase/MultiConnection').establish(App);
 
-ExpressIgniter(app);
+ExpressIgniter(App);
+// module.exports = App;
 
