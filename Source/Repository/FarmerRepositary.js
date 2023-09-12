@@ -1,4 +1,4 @@
-const FarmerModel = require('../DataBase/FarmerSchemaModel').getFarmerModel();
+const FarmerModel = require('../DataBase/FarmerSchemaModel');
 const {isEmpty} = require('../Helpers/Utils');
 
 const FormerQuery = {
@@ -10,7 +10,7 @@ const FormerQuery = {
 	 * @returns {Promise<*>}
 	 */
 	findOneFarmer: async (condition, projection, islean = true) => {
-		if (isEmpty(projection)) {
+        if (isEmpty(projection)) {
 			projection = {
                 farmer_id: 1,
 				'name.full': 1,
@@ -18,8 +18,7 @@ const FormerQuery = {
 				createdAt: 1
 			};
 		}
-		let farmer = await FarmerModel.findOne(condition, projection).lean(islean);
-		return farmer;
+        return FarmerModel.findOne(condition, projection).lean(islean);
 	},
 
 	findFarmer: async (condition, projection, islean = true) => {
