@@ -27,8 +27,7 @@ const Utils = {
      * @returns
      */
     todayDate: () => {
-        let currentDate = moment().format('YYYY-MM-DD');
-        return currentDate;
+        return moment().format('YYYY-MM-DD');
     },
 
     /**

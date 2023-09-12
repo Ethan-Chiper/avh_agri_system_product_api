@@ -6,6 +6,7 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.2",
     "moment": "^2.29.4",
     "mongeese": "^0.0.1",
     "mongoose": "^7.4.1",
