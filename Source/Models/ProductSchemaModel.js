@@ -4,7 +4,7 @@ const timestamps = require('mongoose-timestamp');
 const mongoose = require('mongoose');
 
 const ProductSchema = new ProductConnection.Schema({
-    id: {type: String},
+    product_id: {type: String},
     name: {type: String},
     description: {type: String},
     category: {type: String},

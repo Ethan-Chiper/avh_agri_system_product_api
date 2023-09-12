@@ -1,4 +1,4 @@
-const FarmerModel = require('../DataBase/FarmerSchemaModel');
+const FarmerModel = require('../Models/FarmerSchemaModel');
 const {isEmpty} = require('../Helpers/Utils');
 
 const FormerQuery = {
