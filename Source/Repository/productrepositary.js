@@ -1,4 +1,4 @@
-const ProductModel=require('../DataBase/ProductSchemaModel');
+const ProductModel=require('../Models/ProductSchemaModel');
 const {isEmpty} = require('../Helpers/Utils');
 
 const ProductQuery = {

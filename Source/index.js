@@ -9,7 +9,7 @@ App.use(bodyParser.json());
 App.use('/api/product', require('./Routes/ProductRouter'));
 App.use('/api/former', require('./Routes/FarmerRouter'));
 
-require('./DataBase/MultiConnection').establish(App);
+require('./Models/MultiConnection').establish(App);
 
 module.exports = App;
 
