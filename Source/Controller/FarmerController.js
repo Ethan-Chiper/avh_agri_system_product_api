@@ -1,10 +1,9 @@
 const {todayDate, endDate, getNanoId, networkCall, isEmpty} = require('../Helpers/Utils');
-const FormerModel = require('../DataBase/FarmerSchemaModel');
 const {findFarmer, findOneFarmer} = require('../Repository/FarmerRepositary')
 
 const FormerController = {
     detail: async (queryData) => {
-        const result = await findFarmer({farmer_id:queryData}, '');
+        const result = await findOneFarmer({farmer_id:queryData}, '');
         console.log(1, result)
         try {
             if (result) {

@@ -1,5 +1,5 @@
 const {todayDate, endDate, getNanoId, networkCall, isEmpty} = require('../Helpers/Utils');
-const ProductModel = require('../DataBase/ProductSchemaModel').getProductModel();
+const {createProduct}= require('../Repository/productrepositary');
 
 const ProductController = {
     /***
@@ -87,7 +87,7 @@ const ProductController = {
         };
         try {
             console.log('requestObject', requestObject);
-            let ProductData = await ProductModel.create(requestObject);
+            let ProductData = await createProduct(requestObject);
             console.log(1,ProductData);
             if(!isEmpty(ProductData)){
                 return {error: false, message: 'Product create', data: ProductData};
