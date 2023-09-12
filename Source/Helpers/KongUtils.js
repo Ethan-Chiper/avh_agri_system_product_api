@@ -1,5 +1,4 @@
 const Config = require('../App/Config');
-const {isEmpty, networkCall} = require('./Utils');
 const request = require('request');
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
