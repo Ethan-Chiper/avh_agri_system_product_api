@@ -1,15 +1,19 @@
 const {todayDate, endDate, getNanoId, networkCall, isEmpty} = require('../Helpers/Utils');
 const {findFarmer, findOneFarmer} = require('../Repository/FarmerRepositary')
 
-const FormerController = {
+const FarmerController = {
+    /***
+     * farmer detail
+     * @param queryData
+     * @returns {Promise<{error: boolean, message}|{data: *, error: boolean, message: string}>}
+     */
     detail: async (queryData) => {
-        const result = await findOneFarmer({farmer_id:queryData}, '');
-        console.log(1, result)
+        let result = await findOneFarmer({farmer_id:queryData}, '');
         try {
             if (result) {
                 return {
                     error: false,
-                    message: 'Former details are.',
+                    message: 'Farmer details are.',
                     data: result
                 };
             }
@@ -18,8 +22,7 @@ const FormerController = {
                 error: true, message: error.message
             };
         }
-
     }
 };
 
-module.exports = FormerController;
+module.exports = FarmerController;

@@ -3,7 +3,7 @@ const {createProduct}= require('../Repository/productrepositary');
 
 const ProductController = {
     /***
-     * haspicash insurance
+     * create product
      * @param requestData
      * @returns {Promise<{data: *, error: boolean, message: *}|{error: boolean, message: string}>}
      */
@@ -86,9 +86,7 @@ const ProductController = {
             }
         };
         try {
-            console.log('requestObject', requestObject);
             let ProductData = await createProduct(requestObject);
-            console.log(1,ProductData);
             if(!isEmpty(ProductData)){
                 return {error: false, message: 'Product create', data: ProductData};
             }

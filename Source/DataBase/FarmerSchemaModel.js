@@ -1,7 +1,6 @@
 const Connection = require('../DataBase/MultiConnection');
 const FarmerConnection = Connection.getFarmerDBConnection();
 const timestamps = require('mongoose-timestamp');
-const mongoose = require('mongoose');
 
 const farmerSchema = new FarmerConnection.Schema({
     farmer_id: {type: String},
@@ -143,6 +142,6 @@ const farmerSchema = new FarmerConnection.Schema({
 });
 farmerSchema.plugin(timestamps);
 
-let FarmerModel = mongoose.model('farmers', farmerSchema);
+let FarmerModel = FarmerConnection.model('farmers', farmerSchema);
 
 module.exports = FarmerModel;

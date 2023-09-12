@@ -5,10 +5,10 @@ const ProductQuery = {
 
     createProduct: async (queryOptions) => {
         if(isEmpty(queryOptions)){
-            return await ProductModel.create(queryOptions)
+            return ProductModel.create(queryOptions);
         }
-        return await ProductModel.create(queryOptions);
-    },
+        return ProductModel.create(queryOptions);
+    }
 };
 
 module.exports = ProductQuery;

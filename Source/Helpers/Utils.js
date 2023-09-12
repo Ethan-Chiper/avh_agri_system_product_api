@@ -1,6 +1,5 @@
 const {customAlphabet} = require('nanoid');
 const moment = require('moment');
-const Request = require('request');
 
 const Utils = {
     /**
