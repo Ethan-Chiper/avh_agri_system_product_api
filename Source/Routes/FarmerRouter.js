@@ -7,6 +7,9 @@ const {sendFailureMessage,sendSuccessData,sendSuccessMessage}= require('../App/R
 Router.get('/detail/:farmerId', async (request, response) => {
     try{
         let {error, message, data} = await FarmerController.detail(request.params.farmerId);
+        console.log('error', error);
+        console.log('message', message);
+        console.log('data', data);
         if (!isEmpty(data) && error === false) {
             return sendSuccessData(response, message, data);
         }
