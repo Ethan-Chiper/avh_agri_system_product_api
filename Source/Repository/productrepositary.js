@@ -8,7 +8,7 @@ const ProductQuery = {
             return ProductModel.create(queryOptions);
         }
         return ProductModel.create(queryOptions);
-    },
+    }
 };
 
 module.exports = ProductQuery;

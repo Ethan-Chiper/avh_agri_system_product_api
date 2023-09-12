@@ -10,7 +10,6 @@ const FormerQuery = {
      * @returns {Promise<*>}
      */
     findOneFarmer: async (condition, projection,  islean = true) => {
-
         if (isEmpty(condition?.method)) condition.method = 'findOne';
         if (isEmpty(projection)) {
         			projection = {
