@@ -12,4 +12,3 @@ App.use('/api/former', require('./Routes/FarmerRouter'));
 require('./Models/MultiConnection').establish(App);
 
 module.exports = App;
-
