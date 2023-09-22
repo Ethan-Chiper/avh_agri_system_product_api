@@ -8,8 +8,9 @@ const ProductQuery = {
 	 * @returns {Promise<queryOptions>}
 	 */
 	createProduct: async (queryOptions) => {
-		if (isEmpty(queryOptions)) {
-			return ProductModel.create(queryOptions);
+		if (!isEmpty(queryOptions)) {
+			let product = await ProductModel(queryOptions);
+            return await product.save();
 		}
 		return ProductModel.create(queryOptions);
 	}
