@@ -17,6 +17,7 @@
 		"request": "^2.88.2",
 		"save-dev": "^0.0.1-security",
 		"sonarqube-scanner": "^3.1.0",
+		"supertest": "^6.3.3",
 		"winston": "^3.10.0"
 	},
 	"main": "index.js",
@@ -42,24 +43,24 @@
 		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-prettier": "^5.0.0",
 		"eslint-plugin-unicorn": "^48.0.1",
+		"husky": "^8.0.0",
 		"lint-staged": "^14.0.1",
-		"mochawesome-report-generator": "^6.2.0",
-		"husky": "^8.0.0"
+		"mochawesome-report-generator": "^6.2.0"
 	},
-	 "husky": {
-	     "hooks": {
-	       "pre-commit": "lint-staged"
-	     }
-	   },
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
 	"config": {
-		     "commitizen": {
-		       "path": "./node_modules/cz-conventional-changelog"
-		     }
-		   },
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	},
 	"lint-staged": {
-		     "*.{css,less,scss,html,json,jsx,js}": [
-		       "prettier --write ."
-		     ],
-		     "*.js": "eslint --fix"
-		   }
+		"*.{css,less,scss,html,json,jsx,js}": [
+			"prettier --write ."
+		],
+		"*.js": "eslint --fix"
+	}
 }
