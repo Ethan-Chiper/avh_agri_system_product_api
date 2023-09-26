@@ -1,7 +1,6 @@
 const DBConnection = require('./MultiConnection');
 const ProductConnection = DBConnection.getProductDBConnection();
 const timestamps = require('mongoose-timestamp');
-const mongoose = require('mongoose');
 
 const ProductSchema = new ProductConnection.Schema({
 	// product_id: {type: String},
@@ -98,6 +97,6 @@ const ProductSchema = new ProductConnection.Schema({
 });
 ProductSchema.plugin(timestamps);
 
-let ProductModel = mongoose.model('product', ProductSchema);
+let ProductModel = ProductConnection.model('product', ProductSchema);
 
 module.exports = ProductModel;

@@ -19,7 +19,7 @@
 	},
 	"main": "index.js",
 	"scripts": {
-		"test": "nyc mocha -r dotenv/config Test/Product/initTest.js",
+		"test": "set DOTENV_CONFIG_PATH=Test/.env && mocha -r Test/test.env Test/Product/initTest.js",
 		"start": "node source/index.js",
 		"prepare": "husky install",
 		"lint": "eslint ./",

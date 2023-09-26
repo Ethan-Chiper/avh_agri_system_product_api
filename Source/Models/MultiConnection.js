@@ -2,7 +2,6 @@ const formerDB = require('../App/MongooseConnection').create();
 const mongoose = require('mongoose');
 const Config = require('../App/Config');
 const DB_URL = Config.DB_URL;
-
 const MultiDBConnection = {
 	establish: async (Express) => {
 		return await new Promise(async (resolve) => {
@@ -50,9 +49,6 @@ const MultiDBConnection = {
 	},
 	getFarmerDBConnection: () => {
 		return formerDB;
-	},
-    getTESTProductDBConnection: () => {
-        return mongoose;
-    },
+	}
 };
 module.exports = MultiDBConnection;
