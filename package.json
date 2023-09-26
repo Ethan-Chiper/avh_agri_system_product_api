@@ -3,12 +3,10 @@
 	"version": "1.0.0",
 	"dependencies": {
 		"body-parser": "^1.20.2",
-		"dotenv": "^16.3.1",
 		"express": "^4.18.2",
 		"express-validator": "^7.0.1",
 		"helmet": "^7.0.0",
 		"jsonwebtoken": "^9.0.2",
-		"mocha": "^10.2.0",
 		"moment": "^2.29.4",
 		"mongeese": "^0.0.1",
 		"mongoose": "^7.4.1",
@@ -17,17 +15,16 @@
 		"request": "^2.88.2",
 		"save-dev": "^0.0.1-security",
 		"sonarqube-scanner": "^3.1.0",
-		"supertest": "^6.3.3",
 		"winston": "^3.10.0"
 	},
 	"main": "index.js",
 	"scripts": {
-		"test": "nyc mocha ./Test/initTest.js --timeout=15000 --exit",
+		"test": "nyc mocha -r dotenv/config Test/Product/initTest.js",
 		"start": "node source/index.js",
 		"prepare": "husky install",
 		"lint": "eslint ./",
 		"commit": "cz",
-		"report": "nyc mocha ./Test/initTest.js --timeout=15000 --reporter mochawesome --exit"
+		"report": "nyc mocha Test/Product/initTest.js --reporter mochawesome --exit"
 	},
 	"author": "",
 	"license": "ISC",
@@ -35,6 +32,7 @@
 	"devDependencies": {
 		"chai": "^4.3.8",
 		"commitizen": "^4.3.0",
+		"dotenv": "^10.0.0",
 		"eslint": "^8.49.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-jsdoc": "^46.8.2",
@@ -45,7 +43,9 @@
 		"eslint-plugin-unicorn": "^48.0.1",
 		"husky": "^8.0.0",
 		"lint-staged": "^14.0.1",
-		"mochawesome-report-generator": "^6.2.0"
+		"mocha": "^10.2.0",
+		"mochawesome-report-generator": "^6.2.0",
+		"supertest": "^6.3.3"
 	},
 	"husky": {
 		"hooks": {

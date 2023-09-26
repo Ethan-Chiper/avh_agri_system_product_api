@@ -6,7 +6,7 @@ const {sendFailureMessage, sendSuccessData, sendSuccessMessage} = require('../Ap
 Router.post('/create', async (request, response) => {
 	try {
 		let {error, message, data} = await ProductController.createProduct(request?.body);
-		if (!isEmpty(data) && error === false) {
+		if (!isEmpty(data) && error === undefined) {
 			return sendSuccessData(response, message, data);
 		}
 		return sendFailureMessage(response, message, 400);

@@ -8,5 +8,6 @@ module.exports = {
 	},
 	KONG_URL: {
 		KONG: environment.KONG_URL || 'http://192.168.0.108:7001/consumers/'
-	}
+	},
+    TEST_DB_URL:environment.URL_TESTPRODUCTS
 };

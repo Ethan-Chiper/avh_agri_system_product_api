@@ -1,5 +1,5 @@
 require('./Source/index');
 
 Promise.all([
-    require('./Test/initTest')
+    require('./Test/Product/initTest')
 ]);

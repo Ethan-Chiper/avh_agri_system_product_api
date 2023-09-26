@@ -5,10 +5,10 @@ const DB_URL = Config.DB_URL;
 
 const MultiDBConnection = {
 	establish: async (Express) => {
-		return await new Promise((resolve) => {
+		return await new Promise(async (resolve) => {
 			let productDBCheck = false;
 
-			mongoose.set('strictQuery', true);
+            mongoose.set('strictQuery', true);
 			try {
 				mongoose.connect(DB_URL.PRODUCT_URL, {
 					useNewUrlParser: true,
@@ -50,6 +50,9 @@ const MultiDBConnection = {
 	},
 	getFarmerDBConnection: () => {
 		return formerDB;
-	}
+	},
+    getTESTProductDBConnection: () => {
+        return mongoose;
+    },
 };
 module.exports = MultiDBConnection;
