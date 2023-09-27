@@ -1,9 +1,9 @@
-const DBConnection = require('../Source/Models/MultiConnection');
-const PropertyDataBase = DBConnection.getProductDBConnection();
+// const DBConnection = require('../Source/Models/MultiConnection');
+// const PropertyDataBase = DBConnection.getProductDBConnection();
 const mongoose = require('mongoose');
 const timestamps = require('mongoose-timestamp');
 
-const ProductSchema = new PropertyDataBase.Schema({
+const ProductSchema = new mongoose.Schema({
     // success: {type: Boolean, default: false},
     // message: {type: String},
     // data: {
@@ -101,6 +101,6 @@ const ProductSchema = new PropertyDataBase.Schema({
     status: {type: String, default: ''}
 });
 ProductSchema.plugin(timestamps);
-const ProductModel = PropertyDataBase.model('test_product', ProductSchema);
+const testProductModel = mongoose.model('test_product', ProductSchema);
 
-module.exports = ProductModel;
+module.exports = testProductModel;
