@@ -1,58 +1,57 @@
 const Request =require('supertest');
 const Expect = require('chai').expect
 const dotenv = require('dotenv');
-dotenv.config({path:'Test/.env.test'});
+dotenv.config({path:'Test/.env'});
 let Baseurl = 'http://localhost:2072/api/product';
 
 let requestData = {
-    name: 'test_tomato',
+    name: 'test_orange',
     price: '50'
 };
 
-// describe('Create product', function () {
-//     this.timeout(30000);
-//     before(async function () {
-//         try {
-//             mongoose.connect(TestProductUrl.TEST_PRODUCT_URL, {
-//                 useNewUrlParser: true,
-//                 useUnifiedTopology: true,
-//             });
-//             console.log('Connected to MongoDB...');
-//         } catch (error) {
-//             console.error('Error connecting to MongoDB:', error);
-//         }
-//     });
-//     it('Should create a product with valid request data', function () {
-//         ProductController.createProduct(requestData)
-//             // Request(Baseurl)
-//             //     .post('/product/create')
-//             //     .send(requestData)
-//             .then(async (response) => {
-//                 console.log(response.body);
-//                 let resultObject = new ProductTestCaseModel({
-//                     product_id: requestData?.product_id,
-//                     name: requestData?.name,
-//                     price: requestData?.price,
-//                     tax: requestData?.tax,
-//                     image: requestData?.image,
-//                     status: requestData?.status
-//                 });
-//                 console.log('resultObject', resultObject);
-//                 let savedProduct = await ProductTestCaseModel.create(resultObject);
-//                 console.log('savedProduct', savedProduct);
-//                 Expect(savedProduct).to.be.an('object');
-//             })
-//     })
-// });
 describe('Create product', () => {
     it('should create a new product', () => {
         Request(Baseurl)
             .post('/create')
             .send(requestData)
+            .expect(200)
             .then((response) => {
-                console.log('test')
-                console.log(1,response.body);
                 Expect(response.body.message).to.be.eql('Product created successfully');
+                Expect(response.body.data.price).to.be.eql('50');
+                Expect(response.body.data).to.be.eql('object');
+                Expect(response.statusCode).to.be.eql(200);
+                Expect(response.body.success).to.be.eql(true);
+            });
+    });
+    it('Incorrect url', () => {
+        Request(Baseurl)
+            .post('/product/create')
+            .send(requestData)
+            .expect(404)
+            .then((response) => {
+                Expect(response.statusCode).to.be.eql(404);
+            });
+    });
+    it('Should not empty name', () => {
+        let productObject = structuredClone(requestData);
+        productObject.name = '';
+        Request(Baseurl)
+            .post('/create')
+            .send(productObject)
+            .expect(422)
+            .then((response) => {
+                Expect(response.body.message).to.be.eql('please enter the name');
+            });
+    });
+    it('Should not empty price', () => {
+        let invalidData = structuredClone(requestData);
+        invalidData.price = '';
+        Request(Baseurl)
+            .post('/create')
+            .send(invalidData)
+            .expect(422)
+            .then((response) => {
+                Expect(response.statusCode).to.eql(422);
             });
     });
 });

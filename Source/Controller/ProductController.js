@@ -101,7 +101,6 @@ const ProductController = {
                 }
             }
             let product = await createProduct({document:requestObject,options: {lean: false}});
-            console.log('product', product);
             if (isEmpty(product)) {
                 // let userId = 'product' + '_' + product.product_id;
                 // await createUserAndTokenInKong(userId, (token) => {

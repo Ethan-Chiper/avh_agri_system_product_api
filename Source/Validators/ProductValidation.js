@@ -12,6 +12,12 @@ const Validate = {
 			check('phone.national_number').notEmpty().isMobilePhone('en-IN').trim(),
 			check('email').notEmpty({ignore_whitespace: true})
 		];
-	}
+	},
+    createProduct:() => {
+        return [
+            check('name', 'please enter the name').notEmpty().trim(),
+            check('price', 'please enter price value').notEmpty().trim(),
+        ];
+    }
 };
 module.exports = Validate;
