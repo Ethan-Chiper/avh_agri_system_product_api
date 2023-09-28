@@ -1,5 +1,4 @@
 const ProductModel = require('../Models/ProductSchemaModel');
-const {isEmpty} = require('../Helpers/Utils');
 
 const ProductQuery = {
     /***
@@ -8,13 +7,15 @@ const ProductQuery = {
      * @returns {Promise<queryOptions>}
      */
     createProduct: async (queryOptions) => {
-        console.log('queryOptions', queryOptions);
-        let product = await ProductModel.create(queryOptions);
-        console.log('product', product);
-        return product;
-        // 	let product = ProductModel(queryOptions);
-        // console.log('product', product);
-        //     return product.save();
+        let document = queryOptions?.document || {};
+        let options = queryOptions?.options || {};
+        console.log('document', document);
+        let product = await ProductModel.create([document], options);
+        return product[0];
+        // let product = await ProductModel(document);
+        // await product.save();
+        // console.log(1,product)
+        // return product;
     }
 };
 

@@ -12,7 +12,7 @@ const ProductController = {
     createProduct: async (requestData) => {
         try {
             let uniqeID = 'AVH_' + getNanoId();
-            let requestObject ={
+            let requestObject = {
                 product_id: uniqeID,
                 name: requestData?.name ?? '',
                 price: requestData?.price ?? '',
@@ -93,12 +93,16 @@ const ProductController = {
                 // 	}
                 // }
             };
-
-            console.log('requestObject', requestObject);
-            let product = await ProductModel(requestObject);
-            await product.save();
+            if (isEmpty(requestObject)) {
+                return {
+                    error: true,
+                    message: 'Request data is not found',
+                    data: undefined
+                }
+            }
+            let product = await createProduct({document:requestObject,options: {lean: false}});
             console.log('product', product);
-            if (!isEmpty(product)) {
+            if (isEmpty(product)) {
                 // let userId = 'product' + '_' + product.product_id;
                 // await createUserAndTokenInKong(userId, (token) => {
                 //     if (token)
@@ -106,14 +110,22 @@ const ProductController = {
                 //     return {error: false, message: 'product created successfully'};
                 // });
                 return {
-                    error: false,
-                    message: 'Product create successfully',
-                    data: product
+                    error: true,
+                    message: 'Product data is not saved properly',
+                    data: undefined
                 };
             }
-            return {error: true, message: 'Could not create Product.', data: undefined};
+            return {
+                error: false,
+                message: 'product created successfully',
+                data: product
+            };
         } catch (error) {
-            return {error: true, message: error, data: undefined};
+            return {
+                error: true,
+                message: error,
+                data: undefined
+            };
         }
     }
 };

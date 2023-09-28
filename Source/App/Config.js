@@ -1,5 +1,5 @@
 const Dotenv = require('dotenv');
-Dotenv.config({path: 'Source/App/.env'});
+Dotenv.config();
 const environment = process.env;
 module.exports = {
 	DB_URL: {

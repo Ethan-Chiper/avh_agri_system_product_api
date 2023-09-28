@@ -1,5 +1,4 @@
-const DBConnection = require('./MultiConnection');
-const ProductConnection = DBConnection.getProductDBConnection();
+const ProductConnection = require('./MultiConnection').getProductDBConnection();
 const timestamps = require('mongoose-timestamp');
 
 const ProductSchema = new ProductConnection.Schema({

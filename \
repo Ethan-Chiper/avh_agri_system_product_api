@@ -1,0 +1,12 @@
+Revert "test"
+
+This reverts commit c1eb4bece31a907da2e8f4728ed7909bbd8e75f2.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch feature/product
+# Changes to be committed:
+#	deleted:    Test/initTest.js
+#	modified:   package-lock.json
+#
