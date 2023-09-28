@@ -4,6 +4,7 @@
 	"dependencies": {
 		"body-parser": "^1.20.2",
 		"express": "^4.18.2",
+		"dotenv": "^10.0.0",
 		"express-validator": "^7.0.1",
 		"helmet": "^7.0.0",
 		"jsonwebtoken": "^9.0.2",
@@ -19,8 +20,8 @@
 	},
 	"main": "index.js",
 	"scripts": {
-		"test": "DOTENV_CONFIG_PATH=./Test/.env mocha -r dotenv/config --timeout=15000 Test/index.test.js --exit",
-		"start": "DOTENV_CONFIG_PATH=./Source/App/.env node source/index.js",
+		"test": "DOTENV_CONFIG_PATH=Test/.env.test mocha -r dotenv/config Test/index.test.js --timeout=15000 --exit",
+		"start": "DOTENV_CONFIG_PATH=Source/App/.env.dev node -r dotenv/config Source/index.js",
 		"dev": "nodemon index.js",
 		"prepare": "husky install"
 	},
@@ -29,11 +30,10 @@
 	"description": "product file",
 	"devDependencies": {
 		"chai": "^4.3.8",
-		"dotenv": "^10.0.0",
+		"husky": "^8.0.0",
 		"mocha": "^10.2.0",
 		"mochawesome": "^7.1.3",
 		"nyc": "^15.1.0",
-		"supertest": "^6.3.3",
-		"husky": "^8.0.0"
+		"supertest": "^6.3.3"
 	}
 }

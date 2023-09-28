@@ -5,6 +5,7 @@ const {isEmpty} = require('../Helpers/Utils');
 const {sendFailureMessage, sendSuccessData} = require('../App/Responder');
 const {validationResult} = require('express-validator');
 const {createProduct} = require('../Validators/ProductValidation');
+const {response} = require("express");
 Router.post('/create', createProduct(), async (request, response) => {
     try {
         let hasErrors = validationResult(request);
@@ -19,6 +20,14 @@ Router.post('/create', createProduct(), async (request, response) => {
         return sendFailureMessage(response, message, 400);
     } catch (error) {
         return sendFailureMessage(response, error, 500);
+    }
+});
+
+Router.patch('/update_status', async (request, response) => {
+    try{
+
+    }catch (error) {
+
     }
 });
 

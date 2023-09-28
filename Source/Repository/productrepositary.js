@@ -1,5 +1,6 @@
 const ProductModel = require('../Models/ProductSchemaModel');
-
+const Dotenv = require('dotenv');
+Dotenv.config({path: 'Source/App/.env'});
 const ProductQuery = {
     /***
      * create product
@@ -12,10 +13,9 @@ const ProductQuery = {
         let product = await ProductModel.create([document], options);
         return product[0];
     },
-
     deleteProduct: async (condition) => {
         let options = condition?.options || {};
-        return await ProductModel.deleteMany(condition, options);
+        return await ProductModel.deleteOne(condition, options);
     }
 };
 

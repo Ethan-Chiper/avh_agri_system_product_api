@@ -18,6 +18,14 @@ const Validate = {
             check('name', 'please enter the name').notEmpty().trim(),
             check('price', 'please enter price value').notEmpty().trim(),
         ];
+    },
+    updateStatus:() => {
+        return [
+            check('product_id', 'please enter product_id').notEmpty().trim(),
+            check('name', 'please enter name').notEmpty().trim(),
+            check('price', 'please enter price value').notEmpty().trim(),
+            check('status', 'please enter status').notEmpty().trim()
+        ]
     }
 };
 module.exports = Validate;
