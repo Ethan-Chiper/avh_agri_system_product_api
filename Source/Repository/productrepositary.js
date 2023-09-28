@@ -12,10 +12,11 @@ const ProductQuery = {
         console.log('document', document);
         let product = await ProductModel.create([document], options);
         return product[0];
-        // let product = await ProductModel(document);
-        // await product.save();
-        // console.log(1,product)
-        // return product;
+    },
+
+    deleteProduct: async (condition) => {
+        let options = condition?.options || {};
+        return await ProductModel.deleteOne(condition, options);
     }
 };
 

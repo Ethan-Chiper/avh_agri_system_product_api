@@ -3,12 +3,8 @@ const App = Express();
 let helmet = require('helmet');
 App.use(helmet.hidePoweredBy());
 const bodyParser = require('body-parser');
-const morgan = require('morgan');
-
 
 App.use(bodyParser.json());
-App.use(morgan('combined'));
-
 App.use((request, response, next) => {
     const originalSend = response.send;
     response.send = function (body) {

@@ -1,6 +1,6 @@
 const formerDB = require('../App/MongooseConnection').create();
-const productDB = require('../Helpers/MongoConnection').create();
-// const mongoose = require('mongoose');
+// const productDB = require('../Helpers/MongoConnection').create();
+const mongoose = require('mongoose');
 const Config = require('../App/Config');
 const DB_URL = Config.DB_URL;
 const MultiDBConnection = {
@@ -8,9 +8,9 @@ const MultiDBConnection = {
 		return await new Promise(async (resolve) => {
 			let productDBCheck = false;
 
-            productDB.set('strictQuery', true);
+            mongoose.set('strictQuery', true);
 			try {
-                productDB.connect(DB_URL.PRODUCT_URL, {
+                mongoose.connect(DB_URL.PRODUCT_URL, {
                     serverSelectionTimeoutMS: 3000,
                     socketTimeoutMS: 30000,
 					useNewUrlParser: true,
@@ -21,7 +21,7 @@ const MultiDBConnection = {
 			} catch (error) {
 				throw error;
 			}
-            productDB.set('debug', true);
+            mongoose.set('debug', true);
 
 			let formerDBCheck = false;
 			formerDB.set('strictQuery', true);
@@ -48,7 +48,7 @@ const MultiDBConnection = {
 			});
 	},
 	getProductDBConnection: () => {
-		return productDB;
+		return mongoose;
 	},
 	getFarmerDBConnection: () => {
 		return formerDB;

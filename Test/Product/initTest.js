@@ -1,7 +1,7 @@
 const Request =require('supertest');
 const Expect = require('chai').expect
 const dotenv = require('dotenv');
-dotenv.config({path:'database.env'});
+dotenv.config({path:'Test/.env.test'});
 let Baseurl = 'http://localhost:2072/api/product';
 
 let requestData = {
@@ -45,13 +45,14 @@ let requestData = {
 //     })
 // });
 describe('Create product', () => {
-    it('should create a new product', (done) => {
+    it('should create a new product', () => {
         Request(Baseurl)
             .post('/create')
             .send(requestData)
-            .then((res) => {
-                console.log(1,res);
-                Expect(res.body).to.be.eql('Product created successfully');
+            .then((response) => {
+                console.log('test')
+                console.log(1,response.body);
+                Expect(response.body.message).to.be.eql('Product created successfully');
             });
     });
 });

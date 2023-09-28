@@ -1,5 +1,5 @@
 const Dotenv = require('dotenv');
-Dotenv.config();
+Dotenv.config({path:'Test/.env.test'});
 const environment = process.env;
 
 module.exports = {
