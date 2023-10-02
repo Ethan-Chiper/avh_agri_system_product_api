@@ -3,12 +3,11 @@
 	"version": "1.0.0",
 	"dependencies": {
 		"body-parser": "^1.20.2",
-		"dotenv": "^16.3.1",
 		"express": "^4.18.2",
+		"dotenv": "^10.0.0",
 		"express-validator": "^7.0.1",
 		"helmet": "^7.0.0",
 		"jsonwebtoken": "^9.0.2",
-		"mocha": "^10.2.0",
 		"moment": "^2.29.4",
 		"mongeese": "^0.0.1",
 		"mongoose": "^7.4.1",
@@ -17,50 +16,24 @@
 		"request": "^2.88.2",
 		"save-dev": "^0.0.1-security",
 		"sonarqube-scanner": "^3.1.0",
-		"supertest": "^6.3.3",
 		"winston": "^3.10.0"
 	},
 	"main": "index.js",
 	"scripts": {
-		"test": "nyc mocha ./Test/initTest.js --timeout=15000 --exit",
-		"start": "node source/index.js",
-		"prepare": "husky install",
-		"lint": "eslint ./",
-		"commit": "cz",
-		"report": "nyc mocha ./Test/initTest.js --timeout=15000 --reporter mochawesome --exit"
+		"test": "DOTENV_CONFIG_PATH=Test/.env.test mocha -r dotenv/config Test/index.test.js --timeout=15000 --exit",
+		"start": "DOTENV_CONFIG_PATH=Source/App/.env.dev node -r dotenv/config Source/index.js",
+		"dev": "nodemon index.js",
+		"prepare": "husky install"
 	},
 	"author": "",
 	"license": "ISC",
 	"description": "product file",
 	"devDependencies": {
 		"chai": "^4.3.8",
-		"commitizen": "^4.3.0",
-		"eslint": "^8.49.0",
-		"eslint-config-prettier": "^9.0.0",
-		"eslint-plugin-jsdoc": "^46.8.2",
-		"eslint-plugin-json": "^3.1.0",
-		"eslint-plugin-mocha": "^10.1.0",
-		"eslint-plugin-node": "^11.1.0",
-		"eslint-plugin-prettier": "^5.0.0",
-		"eslint-plugin-unicorn": "^48.0.1",
 		"husky": "^8.0.0",
-		"lint-staged": "^14.0.1",
-		"mochawesome-report-generator": "^6.2.0"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
-	},
-	"config": {
-		"commitizen": {
-			"path": "./node_modules/cz-conventional-changelog"
-		}
-	},
-	"lint-staged": {
-		"*.{css,less,scss,html,json,jsx,js}": [
-			"prettier --write ."
-		],
-		"*.js": "eslint --fix"
+		"mocha": "^10.2.0",
+		"mochawesome": "^7.1.3",
+		"nyc": "^15.1.0",
+		"supertest": "^6.3.3"
 	}
 }
