@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// const TestProductDB = require('../Source/Models/MultiConnection').getProductDBConnection();
 const timestamps = require('mongoose-timestamp');
 
 const ProductSchema = new mongoose.Schema({

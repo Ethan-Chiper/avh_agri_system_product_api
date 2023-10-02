@@ -102,18 +102,18 @@ const ProductController = {
             }
             let product = await createProduct({document:requestObject,options: {lean: false}});
             if (isEmpty(product)) {
-                // let userId = 'product' + '_' + product.product_id;
-                // await createUserAndTokenInKong(userId, (token) => {
-                //     if (token)
-                //         console.log('token', token);
-                //     return {error: false, message: 'product created successfully'};
-                // });
                 return {
                     error: true,
                     message: 'Product data is not saved properly',
                     data: undefined
                 };
             }
+            // let userId = 'product' + '_' + product.product_id;
+            // await createUserAndTokenInKong(userId, (token) => {
+            //     if (token)
+            //         console.log('token', token);
+            //     return {error: false, message: 'consumer product_id created successfully'};
+            // });
             return {
                 error: false,
                 message: 'product created successfully',
