@@ -8,6 +8,7 @@ const ProductSchema = new ProductConnection.Schema({
 	category: {type: String},
 	variety: {type: String},
 	origin: {type: String},
+	status:{type: String, default: 'deactive'},
 	harvest: {
 		season: {type: String},
 		date: {type: String}

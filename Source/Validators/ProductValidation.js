@@ -21,10 +21,7 @@ const Validate = {
     },
     updateStatus:() => {
         return [
-            check('product_id', 'please enter product_id').notEmpty().trim(),
-            check('name', 'please enter name').notEmpty().trim(),
-            check('price', 'please enter price value').notEmpty().trim(),
-            check('status', 'please enter status').notEmpty().trim()
+            check('product_id', 'please enter product_id').notEmpty().trim()
         ]
     }
 };

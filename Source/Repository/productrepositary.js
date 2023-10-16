@@ -22,11 +22,9 @@ const ProductQuery = {
      * @param {*} useLean 
      * @returns 
      */
-    findOneProduct: async (condition, projection, useLean) => {
-		if (isEmpty(projection)) {
-			projection = {status: 1};
-		}
-		return await ProductModel.findOne(condition, projection).lean(useLean);
+    findOneProduct: async (condition, projection) => {
+		if (isEmpty(projection)) projection = {}
+		return await ProductModel.findOne(condition, projection);
 	},
     /**
      * find product
@@ -36,8 +34,6 @@ const ProductQuery = {
      * @returns 
      */
     findProduct: async (condition, projection, islean = true) => {
-        console.log(condition);
-        console.log(projection)
 		return await ProductModel.find(condition, projection).lean(islean);
 	},
     /**
