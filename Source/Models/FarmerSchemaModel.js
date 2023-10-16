@@ -1,4 +1,4 @@
-const FarmerConnection = require('.//MultiConnection').getFarmerDBConnection();
+const FarmerConnection = require('./MultiConnection').getFarmerDBConnection();
 const timestamps = require('mongoose-timestamp');
 
 const farmerSchema = new FarmerConnection.Schema({
