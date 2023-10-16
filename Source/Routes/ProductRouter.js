@@ -5,6 +5,8 @@ const {isEmpty} = require('../Helpers/Utils');
 const {sendFailureMessage, sendSuccessData} = require('../App/Responder');
 const {validationResult} = require('express-validator');
 const {createProduct, listValidation, updateStatus} = require('../Validators/ProductValidation');
+// const Authentication = require('../Helpers/Authentication');
+// Router.use(Authentication());
 
 Router.post('/create', createProduct(), async (request, response) => {
     try {
@@ -56,5 +58,20 @@ Router.patch('/update_status',updateStatus(), async (request, response) => {
         return sendFailureMessage(response, error, 500);
     }
 });
+
+Router.delete('/delete/:productId', async (request, response) => {
+	try {
+		let {error, message, data} = await ProductController.deleteProduct(
+			request.params.productId
+		);
+		if (error === false) {
+			return sendSuccessData(response, message, data);
+		}
+		return sendFailureMessage(response, message, 400);
+	} catch (error) {
+		return sendFailureMessage(response, error, 500);
+	}
+});
+// Router.use('/', Router);
 
 module.exports = Router;
