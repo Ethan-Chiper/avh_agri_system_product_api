@@ -63,7 +63,81 @@ const Utils = {
 			return false;
 		}
 		return true;
-	}
+	},
+	/***
+	 * date option
+	 */
+	dateFinder: (data) => {
+		let query = {};
+		let toDate = Moment().endOf('day').toDate();
+		let previousDay = Moment().startOf('day').subtract(1, 'day').toDate();
+		let thisWeek = Moment().startOf('week').toDate();
+		let thisMonth = Moment().startOf('month').toDate();
+		let thisYear = Moment().startOf('year').toDate();
+
+		if (data?.date_option) {
+			let fromDate;
+			switch (data?.date_option) {
+				case 'weekly': {
+					fromDate = thisWeek;
+					query = {$gte: fromDate, $lte: toDate};
+					break;
+				}
+				case 'monthly': {
+					fromDate = thisMonth;
+					query = {$gte: fromDate, $lte: toDate};
+					break;
+				}
+				case 'yearly': {
+					fromDate = thisYear;
+					query = {$gte: fromDate, $lte: toDate};
+					break;
+				}
+				case 'yesterday': {
+					fromDate = previousDay;
+					toDate = Moment().endOf('day').subtract(1, 'day').toDate();
+					query = {$gte: fromDate, $lt: toDate};
+					break;
+				}
+				default: {
+					fromDate = new Date(Moment().startOf('day'));
+					query = {$gte: fromDate, $lte: toDate};
+					break;
+				}
+			}
+		}
+		if (data?.from_time) {
+			let startTime = new Date(data?.from_time);
+			startTime.setHours('00');
+			startTime.setMinutes('00');
+			startTime.setSeconds('00');
+			query = {$gte: startTime};
+		}
+
+		if (data?.to_time) {
+			let endTime = new Date(data?.to_time);
+			endTime.setHours('23');
+			endTime.setMinutes('59');
+			endTime.setSeconds('59');
+			query = {$lte: endTime};
+		}
+
+		if (data?.from_time && data?.to_time) {
+			let startTime = new Date(data?.from_time);
+			startTime.setHours('00');
+			startTime.setMinutes('00');
+			startTime.setSeconds('00');
+
+			let endTime = new Date(data?.to_time);
+			endTime.setHours('23');
+			endTime.setMinutes('59');
+			endTime.setSeconds('59');
+
+			query = {$gte: startTime, $lt: endTime};
+		}
+
+		return query;
+	},
 };
 
 module.exports = Utils;
