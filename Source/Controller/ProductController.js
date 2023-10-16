@@ -1,8 +1,7 @@
 const {todayDate, endDate, dateFinder,getNanoId, networkCall, isEmpty} = require('../Helpers/Utils');
 const {createUserAndTokenInKong} = require('../Helpers/KongUtils');
-const {createProduct} = require('../Repository/productrepositary');
+const {createProduct, findProduct, findOneProduct} = require('../Repository/productrepositary');
 const ProductModel = require('../Models/ProductSchemaModel');
-const{findProduct}=require('../Repository/productrepositary');
 
 const ProductController = {
     /***
@@ -164,6 +163,46 @@ const ProductController = {
 				data: undefined
 			};
         }  
+    },
+    /**
+     * status update
+     * @param {*} requestData 
+     * @returns 
+     */
+    updateStatus:async(requestData) => {
+        try{
+            if(isEmpty(requestData)) {
+                return{
+                    error:true,
+                    message: 'request value is not empty'
+                }
+            }
+            let projection = {
+                status: 1
+            }
+            let product = await findOneProduct({product_id:requestData?.product_id}, projection);
+            if(isEmpty(product)){
+                return {
+                    error : true,
+                    message : 'Product is not available'
+                }
+            }else {
+                let status = product['status'] === 'active' ? 'deactive' : 'active';
+                product.status = status;
+                product.markModified('status');
+                let result = await product.save();
+                return {
+					error: false,
+                    message: 'Status update successfully!!',
+					data: result
+				};
+            }
+        }catch(error) {
+            return {
+                error: true,
+                message: error?.message
+            };
+        }
     }
 };
 module.exports = ProductController;
