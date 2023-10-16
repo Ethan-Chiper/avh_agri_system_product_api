@@ -1,7 +1,8 @@
-const {todayDate, endDate, getNanoId, networkCall, isEmpty} = require('../Helpers/Utils');
+const {todayDate, endDate, dateFinder,getNanoId, networkCall, isEmpty} = require('../Helpers/Utils');
 const {createUserAndTokenInKong} = require('../Helpers/KongUtils');
 const {createProduct} = require('../Repository/productrepositary');
 const ProductModel = require('../Models/ProductSchemaModel');
+const{findProduct}=require('../Repository/productrepositary');
 
 const ProductController = {
     /***
@@ -118,6 +119,51 @@ const ProductController = {
                 data: undefined
             };
         }
+    },
+    /**
+     * product list
+     * @param {*} query 
+     * @param {*} product_id 
+     * @returns 
+     */
+    list: async(query, product_id) => {
+        try{
+            let queryObject = {};
+			let limit = query?.limit ? Number.parseInt(query?.limit) : 20;
+			let page = query?.page ? Number.parseInt(query?.page) : 1;
+			if (query?.product_id) queryObject['product_id'] = query?.product_id;
+			if (query?.name) queryObject['name'] = query?.name;
+			if (query?.status) queryObject['status'] = query?.status;
+			if (query?.from_date || query?.to_date || query.date_option) {
+				queryObject['createdAt'] = dateFinder(query);
+			}
+            if (product_id) {
+				queryObject['product_id'] = product_id;
+			}
+            let productData = await ProductModel.find(queryObject)
+				.limit(limit)
+				.skip((page - 1) * limit)
+				.sort({_id: -1})
+				.lean();
+            if(isEmpty(productData)) {
+                return {
+					error: true,
+					message: 'Product list is not found',
+					data: undefined
+				};
+            }
+            return {
+				error: false,
+				message: 'Product list',
+				data: productData
+			};
+        }catch(error){
+            return {
+				error: error,
+				message: 'Product list is not available',
+				data: undefined
+			};
+        }  
     }
 };
 module.exports = ProductController;
