@@ -10,8 +10,8 @@ const ProductQuery = {
      * @returns {Promise<queryOptions>}
      */
     createProduct: async (queryOptions) => {
-        let document = queryOptions?.document || {};
-        let options = queryOptions?.options || {};
+        let document = queryOptions?.document ?? {};
+        let options = queryOptions?.options ?? {};
         let product = await ProductModel.create([document], options);
         return product[0];
     },

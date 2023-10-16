@@ -1,5 +1,5 @@
 const {todayDate, endDate, dateFinder,getNanoId, networkCall, isEmpty} = require('../Helpers/Utils');
-const {createUserAndTokenInKong} = require('../Helpers/KongUtils');
+const {createUserAndTokenInKong,deleteUser} = require('../Helpers/KongUtils');
 const {createProduct, findProduct, findOneProduct} = require('../Repository/productrepositary');
 const ProductModel = require('../Models/ProductSchemaModel');
 
@@ -203,6 +203,30 @@ const ProductController = {
                 message: error?.message
             };
         }
-    }
+    },
+    deleteProduct: async (product_id) => {
+		if (isEmpty(product_id)) {
+			return {error: true, message: 'Unauthorized access.'};
+		} else {
+			try {
+				let product = await findOneProduct({product_id: product_id});
+				if (isEmpty(product)) {
+					return {error: false, message: 'Invalid Product!'};
+				} else {
+					let deleteProduct = await deleteUser(product_id);
+                    await product.deleteOne();
+					if (deleteProduct) {
+						return {error: false, data: {}, message: 'Product deleted successfully!'};
+					}
+					return {error: false, data: {}, message: 'Something went wrong!'};
+				}
+			} catch (error) {
+				return {
+					error: true,
+					message: error?.message
+				};
+			}
+		}
+	}
 };
 module.exports = ProductController;

@@ -2,6 +2,7 @@ const Config = require('../App/Config');
 const request = require('request');
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
+const {networkCall} = require('../Helpers/Utils');
 
 const KongUtils = {
 	/**
@@ -57,6 +58,28 @@ const KongUtils = {
 				} else callback(null, {});
 			}
 		);
+	},
+	/**
+	 * delete product
+	 * @param {*} productId 
+	 * @returns 
+	 */
+	deleteUser: async (productId) => {
+		try {
+			let postData = {
+				url: Config.KONG_URL.KONG + 'consumers/product_' + productId,
+				method: 'DELETE'
+			};
+			console.log('postData', postData);
+			let data = await networkCall(postData);
+			console.log('data', data);
+			if (data) {
+				return {error: false, message: 'User Deleted in Kong successfully!'};
+			}
+		} catch (error) {
+			return {error: true, message: error.message || 'While deleting caught error'};
+		}
+		return false;
 	}
 };
 module.exports = KongUtils;
