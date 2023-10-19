@@ -85,6 +85,7 @@ const ProductController = {
                 	}
                 }
             };
+            console.log(1, requestObject);
             if (isEmpty(requestObject)) {
                 return {
                     error: true,

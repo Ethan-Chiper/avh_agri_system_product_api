@@ -1,6 +1,8 @@
 const Express = require('express');
 const App = Express();
 let helmet = require('helmet');
+const cors = require('cors');
+App.use(cors())
 App.use(helmet.hidePoweredBy());
 const bodyParser = require('body-parser');
 App.use(bodyParser.json());
