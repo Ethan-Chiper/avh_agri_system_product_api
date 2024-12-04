@@ -11,7 +11,7 @@
 		"jsonwebtoken": "^9.0.2",
 		"moment": "^2.29.4",
 		"mongeese": "^0.0.1",
-		"mongoose": "^7.4.1",
+		"mongoose": "^7.8.3",
 		"mongoose-timestamp": "^0.6.0",
 		"nanoid": "^3.3.4",
 		"request": "^2.88.2",
