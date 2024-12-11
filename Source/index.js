@@ -16,7 +16,6 @@ App.use((request, response, next) => {
         response.locals.middlewareApplied = true;
         originalSend.apply(response, arguments);
     };
-
     next();
 });
 /***----------------------------------------------------------------------------------------------**/
