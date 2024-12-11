@@ -1,11 +1,11 @@
 const {isEmpty, getIdAndRole} = require('../Helpers/Utils');
 const {sendFailureMessage} = require('../App/Responder');
+
 /**
  * Authenticate logged-in user
  * @returns {(function(*, *, *): Promise<*|undefined>)|*}
  * @constructor
  */
-
 const Authentication = () => {
 	return async (request, response, next) => {
 		try {
